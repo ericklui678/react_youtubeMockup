@@ -1,3 +1,4 @@
+import _ from 'lodash'; // lodash used to throttle how often search is called
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import YTSearch from 'youtube-api-search';
@@ -28,9 +29,12 @@ class App extends Component {
   }
 
   render() {
+    // debounce calls getSearchTerm once every 300ms
+    const videoSearch = _.debounce((term) => { this.getSearchTerm(term) }, 300);
+
     return (
       <div>
-        <SearchBar getSearchTerm={ (term) => this.getSearchTerm(term) }/>
+        <SearchBar getSearchTerm={ videoSearch }/>
         <div className='row'>
           <VideoDetail video={ this.state.selectedVideo }/>
           <VideoList
