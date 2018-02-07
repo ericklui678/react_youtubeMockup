@@ -10,8 +10,8 @@ export default class SearchBar extends Component {
   // e.target.value
   render() {
     return (
-      <div>
-        <input
+      <div className='input-group'>
+        <input className='form-control mb-2'
           value={ this.state.term }
           onChange={e => this.setState({ term: e.target.value })}/>
       </div>
